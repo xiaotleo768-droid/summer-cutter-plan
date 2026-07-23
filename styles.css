@@ -534,6 +534,12 @@ label span {
   border-radius: 8px;
 }
 
+.print-page {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-height: 664px;
+}
+
 .sheet-hero {
   display: flex;
   align-items: start;
@@ -774,8 +780,13 @@ label span {
 
 @media print {
   @page {
-    size: A4 landscape;
+    size: A4;
     margin: 8mm;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   body {
@@ -793,26 +804,105 @@ label span {
   .print-view,
   .preview-stage {
     display: block !important;
+    overflow: visible !important;
     padding: 0;
     background: white;
   }
 
   .print-sheet {
     width: 100%;
-    min-height: auto;
+    height: calc(100vh - 16mm);
+    min-height: 0;
     padding: 0;
     border-radius: 0;
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-page {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    height: calc(100vh - 16mm);
+    min-height: 0;
+    gap: 4mm;
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sheet-hero {
+    min-height: 0;
+    padding: 4mm 5mm;
+    border-width: 2px;
   }
 
   .sheet-hero h2 {
-    font-size: 28px;
+    margin-bottom: 2mm;
+    font-size: 22px;
+    line-height: 1.05;
+  }
+
+  .sheet-hero p,
+  .name-card {
+    font-size: 12px;
+  }
+
+  .name-card {
+    min-width: 38mm;
+    padding: 2mm 3mm;
+  }
+
+  .sheet-motto {
+    margin: 0 auto;
+    padding: 2mm 12mm;
+    font-size: 13px;
+  }
+
+  .strip-grid {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .print-strip {
-    min-height: 162mm;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-strip h3 {
+    padding: 3mm 2mm;
+    font-size: 18px;
+    line-height: 1.1;
+  }
+
+  .print-strip ol {
+    align-content: stretch;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .print-strip li {
-    min-height: 13mm;
+    min-height: 0;
+    padding: 2mm;
+    font-size: 11px;
+  }
+
+  .print-strip li span {
+    width: 5mm;
+    height: 5mm;
+    font-size: 10px;
+  }
+
+  .print-strip li strong {
+    font-size: 11px;
+    line-height: 1.2;
   }
 }

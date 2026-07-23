@@ -244,20 +244,22 @@ function renderTask(column, task, index) {
 function renderPrintSheet() {
   dom.printSheet.classList.toggle("ink-saver", dom.inkSaverToggle.checked);
   dom.printSheet.innerHTML = `
-    <header class="sheet-hero">
-      <div>
-        <h2>${escapeHtml(plan.title)}</h2>
-        <p>${escapeHtml(plan.subtitle)}</p>
-      </div>
-      <div class="name-card">
-        <span>姓名：</span>
-        <strong>${escapeHtml(plan.student)}</strong>
-      </div>
-    </header>
-    <p class="sheet-motto">${escapeHtml(plan.motto)}</p>
-    <section class="strip-grid">
-      ${plan.columns.map(renderPrintColumn).join("")}
-    </section>
+    <div class="print-page">
+      <header class="sheet-hero">
+        <div>
+          <h2>${escapeHtml(plan.title)}</h2>
+          <p>${escapeHtml(plan.subtitle)}</p>
+        </div>
+        <div class="name-card">
+          <span>姓名：</span>
+          <strong>${escapeHtml(plan.student)}</strong>
+        </div>
+      </header>
+      <p class="sheet-motto">${escapeHtml(plan.motto)}</p>
+      <section class="strip-grid">
+        ${plan.columns.map(renderPrintColumn).join("")}
+      </section>
+    </div>
   `;
 }
 
